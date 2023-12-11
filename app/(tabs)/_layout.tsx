@@ -1,8 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
+import { Link, Tabs, router } from 'expo-router';
 import { Pressable, useColorScheme } from 'react-native';
 
 import Colors from '../../constants/Colors';
+import { Ionicons } from '@expo/vector-icons';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -49,6 +50,21 @@ export default function TabLayout() {
           title: 'Tab Two',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
+      />
+      <Tabs.Screen
+        name="action"
+        options={{
+          title: 'Action',
+          tabBarIcon: ({ size, color }) => (
+            <Ionicons name="alert-circle-outline" size={size} color={color}></Ionicons>
+          )
+        }}
+        listeners={() => ({
+          tabPress: (e) => {
+            e.preventDefault()
+            router.push('/modal')
+          }
+        })}
       />
     </Tabs>
   );
